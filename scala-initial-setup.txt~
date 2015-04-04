@@ -1,0 +1,80 @@
+--activator is based on sbt , which is the build tool for scala.
+-- it has the advantage of keeping itself of updated.
+-- its a is a super set of sbt.
+
+downlaod link
+https://typesafe.com/community/core-tools/activator-and-sbt
+
+actual link
+https://typesafe.com/get-started
+
+-- unzip and move it into softwares folder
+
+unzip typsesafeactivator.zip
+
+mv ~/Downloads/activator-1.3.2      ~/softwares/
+
+
+
+-- check the path variable 
+echo $PATH
+
+--you would see /usr/bin , we create a symlink here so that its available to be run from the command line.
+
+-- we also change the .bashrc to set up some aliases
+
+
+ls ~/softwares/activator-1.3.2
+
+-- gives activator , activator.bat etc etc, we need to put activator on the path
+
+cd /usr/bin
+
+sudo ln -s ~/softwares/activator-1.3.2/activator .
+
+-- check 
+ls | grep "activator"
+
+
+-- now the .bashrc
+alias act=activator
+
+-- source it or open and close session
+
+
+-- run act ui 
+
+
+-- in the browser point to http://127.0.0.1:8888/home
+if u see a web page then all is good
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
