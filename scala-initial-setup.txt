@@ -53,6 +53,45 @@ if u see a web page then all is good
 
 ---------------------- set up ide ----------------
 
+eclipse set up.
+download scala ide 
+
+http://scala-ide.org/download/sdk.html 
+
+
+-- do the same symlink thing like before 
+
+-- to run eclipse in the background 
+
+>eclipse &
+
+
+
+--  begining scala so i do not know how to use typesafe activator
+-- so will download all the sacal binaries so that it gives me access to reply from command line , howevere this can be done visa eclipse-scala ide ( the console is not great though).
+
+-- download the same version of binaries as scala-eclipse ide
+-- in this case 2.11.6
+
+
+-- do the same symlink thing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
