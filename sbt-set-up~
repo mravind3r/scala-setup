@@ -77,7 +77,7 @@ usually plugin for 0.12+ version will go into ~/.sbt/0.12/plugins folder and so 
 
 plugins can be found at http://www.scala-sbt.org/0.13/docs/Community-Plugins.html
 
--- the following plugin will enable you to create an eclipse project from sbt
+-- the following plugin will enable you to create an eclipse project from sbt, create /plugins/eclipse.sbt
 
 addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "3.0.0")
 
@@ -111,6 +111,27 @@ how to use the above ???
 > sbt cc
 
 > sbt rc
+
+
+
+--- colouring REPL as of 2.11.5  and above
+
+-- if you are using just repl on it own and not sbt -->   in   ~/.bashrc  put the following line    # alias scala="scala -Dscala.color=true" 
+
+-- or if you dont want to use the .bashrc file invoke the repl by doing the following #> scala -Dscala.color=true
+
+-- reply from within the sbt ??
+
+To enable colorized REPL output when using sbt console, create the following file as ~/.sbt/0.13/repl.sbt:
+
+initialize ~= { _ =>
+  val ansi = System.getProperty("sbt.log.noformat", "false") != "true"
+  if (ansi) System.setProperty("scala.color", "true")
+}
+
+
+
+
 
 
 

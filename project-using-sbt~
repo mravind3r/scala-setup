@@ -1,0 +1,90 @@
+
+-- simplest way to build is a project 
+-- keeping in mind the previous document of sbt-set up was followed and all configurations have been completed, 
+along with the eclipse.sbt file under the global ~/.sbt/0.13/plugins folder
+
+
+1)mkdir hello
+2)cd Hello
+3)sbt eclipse 
+4) tree ( provided its installed)
+
+the output will be a maven style folder structure.
+
+
+import this project normally into eclipse and viola !! all should work as normal.
+
+However we still need to have some project specific dependencies ie plugins, sbt version etc to be configured
+
+-- please refer to sbt-set up to undertand where the following files need to be created
+
+
+-- build.properties   /Hello/build.properties
+
+sbt.version=0.13.8
+
+
+-- build.sbt , this file will be useful to give GAV co-ordinates like maven
+
+organization := "some company name"
+
+name := "some project name"  // give it as "hello" since it is in the same folder as /hello
+
+version := "0.1.1-SNAPSHOT"
+
+scalaVersion := "2.11.6"
+
+scalacOptions ++= Seq("-deprecation", "-encoding", "UTF-8", "-feature", "-target:jvm-1.7", "-unchecked",
+    "-Ywarn-adapted-args", "-Ywarn-value-discard", "-Xlint")
+
+// this is optional , cos it links to github repository
+scalacOptions in (Compile, doc) <++= baseDirectory.map {
+  (bd: File) => Seq[String](
+     "-sourcepath", bd.getAbsolutePath,
+     "-doc-source-url", "https://github.com/mslinn/changeMe/tree/master€{FILE_PATH}.scala"
+  )
+}
+
+javacOptions ++= Seq("-Xlint:deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-g:vars")
+
+resolvers ++= Seq(
+  "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases"
+)
+
+libraryDependencies ++= Seq(
+//  "org.scalatest"           %% "scalatest"     % "2.0" % "test" withSources(),
+//  "com.github.nscala-time"  %% "nscala-time"   % "1.8.0" withSources()
+)
+
+logLevel := Level.Warn
+
+// Only show warnings and errors on the screen for compilations.
+// This applies to both test:compile and compile and is Info by default
+logLevel in compile := Level.Warn
+
+// Level.INFO is needed to see detailed output when running tests
+logLevel in test := Level.Info
+
+// define the statements initially evaluated when entering 'console', 'console-quick', or 'console-project'
+initialCommands := """
+""".stripMargin
+
+
+
+
+--------------- tips
+
+say u add a plugin, eclipse ide cannot do a refresh so your only friend is sbt 
+goto the command line and within the project folder  run 
+
+/hello> sbt eclipse
+
+-- changing the build.sbt inside eclipse ide and running > eclipse from the already running sbt process throws and error.
+
+
+
+
+
+
+
+

@@ -77,7 +77,7 @@ usually plugin for 0.12+ version will go into ~/.sbt/0.12/plugins folder and so 
 
 plugins can be found at http://www.scala-sbt.org/0.13/docs/Community-Plugins.html
 
--- the following plugin will enable you to create an eclipse project from sbt
+-- the following plugin will enable you to create an eclipse project from sbt, create /plugins/eclipse.sbt and add the following line
 
 addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "3.0.0")
 
