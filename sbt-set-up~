@@ -1,0 +1,149 @@
+--sbt is superior to repl
+--This a build tool like maven and follows maven conventions
+-- sbt and its configurations have changed between 0.12 sbt and 0.13 sbt versions
+-- this set up is for 0.13 the latest version
+-- sbt can be used to compile,run,test your projects.
+-- it can also be used to put your project in live interactive mode , ie , if your source changes in your eclipse ide , the underlying sbt will give a live compile time information.
+-- sbt picks up configurations,dependencies specified in various files .File Names( used for configurations, dependencies) and folder locations have to be defined as per convention.
+-- like maven puts its cache libs in ~/.m2 sbt uses ~/.ivy2 to store its local repository of libs.
+
+
+
+-- how does sbt work.
+1) its first compiles all the project builder files.These builder files are 
+
+assuming your folder sturture looks like this --
+~/first-scala
+   	     /src/main
+		 /java
+		 /resources
+		 /scala
+		 /test			
+	     	
+             /build.sbt
+             /plugins.sbt 
+             /build.properties
+
+
+first-scala is a scala project.
+
+a) if using 0.13 version located in ~/.sbt/0.13/  folder if present or placed directly under ~./sbt/ folder
+b) all .sbt files in the top-level directory of your project folder(parent of first-scala) and also Build.scala if present
+c) all files in your projects directory(first-scala eg build.sbt,plugins.sbt here)
+
+2) The compiled builder files are used to compile and also run your project.
+
+3) plugins.sbt defines the sbt plugins you want to make available to your project
+
+4) build.properties contains the version of sbt you want to use with this project
+
+
+
+-- We will set up sbt now..
+
+-- download the tar ball file from 
+http://www.scala-sbt.org/download.html
+
+-- do the standard thing
+-- untar , place it in softwares folder if u have one , create a soft link in usr/bin and Bob's ur uncle.
+
+
+inside /usr/bin    ln -s /~/softwares/sbt/bin/sbt
+
+???? how do we change the memory setting for the java processes ???
+
+~/softwares/sbt/conf/
+
+There is a sbtopts file 
+
+-mem 4096  
+
+sets the jvm memory arguments.
+
+-- once one test with >  sbt -v , this should give you all the options that sbt is running with.
+
+
+
+------ build.properties
+Here we can specify the sbt version to be used with the project
+
+sbt.version=0.13.7
+
+
+---- plugins ---
+
+Globally configured plugins are present in ~/.sbt/0.13/plugins folder
+usually plugin for 0.12+ version will go into ~/.sbt/0.12/plugins folder and so on as plguins have compatibility issues with different versions of sbt
+
+plugins can be found at http://www.scala-sbt.org/0.13/docs/Community-Plugins.html
+
+-- the following plugin will enable you to create an eclipse project from sbt
+
+addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "3.0.0")
+
+
+---- a popular plugin ---- we r creating an new .sbt file here although its is not necessary
+sbt-updates - Shows dependencies which have updates.
+Create ~/.sbt/0.13/plugins/sbtUpdates.sbt containing this line:
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.1.6")
+
+invoke this plugin as  > sbt-updates
+
+-------------
+
+.sbtrc and ~/.sbtrc is evaluated as a command before the project is loaded.
+
+
+# Clear the screen and recompile the program each time a change is made
+alias cc = ~; eval "\u001B[2J\u001B[0\u003B0H"; compile
+
+# Clear the screen and rerun the program each time a change is made
+alias rc = ~; eval "\u001B[2J\u001B[0\u003B0H"; run
+
+# Clear the screen and only rerun changed unit tests specific to the modified code
+alias tc = ~; eval "\u001B[2J\u001B[0\u003B0H"; testQuick
+
+
+
+
+how to use the above ???
+
+> sbt cc
+
+> sbt rc
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
